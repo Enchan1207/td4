@@ -20,9 +20,25 @@ module cpu_test ();
         $dumpfile("cpu_test.vcd");
         $dumpvars(0, cpu_test);
 
+        // 入力をセットして3命令実行
         cpuInput <= 4'hD;
         #3;
+
+        // 実行後、入力値と同じものが出力されるはず
         if(cpuOutput != 4'hD) begin
+            $fatal(1, "Invalid output");
+        end
+
+        // もう1命令実行 ここでjmpしてもどる
+        #1;
+        if(address != 0) begin
+            $fatal(1, "Invalid address");
+        end
+
+        // 同じループを実行
+        cpuInput <= 4'h7;
+        #3;
+        if(cpuOutput != 4'h7) begin
             $fatal(1, "Invalid output");
         end
 
