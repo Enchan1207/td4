@@ -9,7 +9,7 @@ IVERILOG := iverilog
 OUT_FILES := $(patsubst $(TESTS_DIR)/%.test.v, $(SIM_DIR)/%.out, $(wildcard $(TESTS_DIR)/*.test.v))
 all: $(OUT_FILES)
 
-$(SIM_DIR)/%.out: $(TESTS_DIR)/%.test.v
+$(SIM_DIR)/%.out: $(TESTS_DIR)/%.test.v $(SOURCE_DIR)/%.v
 	@mkdir -p $(SIM_DIR)
 	$(IVERILOG) -I $(SOURCE_DIR) -o $@ $<
 
