@@ -6,6 +6,7 @@ module ProgramMemory (
     function [7:0] memory;
         input [3:0] n;
         case (n)
+            4'h0: memory = 8'b00000000;
             4'h1: memory = 8'b00000000;
             4'h2: memory = 8'b00000000;
             4'h3: memory = 8'b00000000;
