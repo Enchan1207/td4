@@ -30,7 +30,7 @@ module TD4 (
         .A(registerFileInternalOutput[0]),
         .B(registerFileInternalOutput[1]),
         .C(IN),
-        .D(registerFileInternalOutput[2]),
+        .D(4'b0),
         .OE(registerFileOE),
         .Y(registerFileOutput)
     );
@@ -56,9 +56,7 @@ module TD4 (
 
     // モジュール間の接続
     assign A = registerFileInternalOutput[2]; // 外部アドレスバスとPCの出力とを接続
-    wire [bitWidth-1:0] internalDataBus;
-    assign registerFileInput = internalDataBus; // レジスタファイルの出力を内部データバスに接続
-    assign aluOutput = internalDataBus; // ALUの出力を内部データバスに接続
+    assign registerFileInput = aluOutput;
 
     always @(posedge CLK) begin
         aluCarryState <= aluCarrySignal;
