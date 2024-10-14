@@ -37,6 +37,16 @@ module register_test ();
             $fatal(1, "Value not changed when CS is asserted");
         end
         CS <= 1;
+        #1;
+
+        // CLRをアサートしてクロックを入れると値を初期化する
+        CLR <= 0;
+        #1;
+        if (Q != 0) begin
+            $fatal(1, "Value not cleared when CLR is asserted");
+        end
+        CLR <= 0;
+        #1;
 
         $finish();
     end
