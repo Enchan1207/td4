@@ -1,0 +1,25 @@
+name: CI
+
+on:
+    pull_request:
+        paths:
+            - src/*
+            - tests/*
+    push:
+        branches:
+            - master
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            
+            - name: Prepare environment
+              run: sudo apt-get -y install iverilog
+            
+            - name: Build
+              run: make all
+
+            - name: Test
+              run: make test
