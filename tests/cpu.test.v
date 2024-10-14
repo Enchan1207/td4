@@ -8,8 +8,11 @@ module cpu_test ();
 
     wire [3:0] address;
     wire [7:0] data;
-    
-    TD4 cpu (.CLK(CLK), .CLR(CLR), .A(address), .D(data));
+
+    reg [3:0] cpuInput = 0;
+    wire [3:0] cpuOutput;
+
+    TD4 cpu (.CLK(CLK), .CLR(CLR), .A(address), .D(data), .IN(cpuInput), .OUT(cpuOutput));
 
     ProgramMemory progmem(.A(address), .D(data));
 
@@ -17,7 +20,10 @@ module cpu_test ();
         $dumpfile("cpu_test.vcd");
         $dumpvars(0, cpu_test);
 
-        #1;
+        #3;
+        if(cpuOutput != 5) begin
+            $fatal(1, "Invalid output");
+        end
 
         $finish();
     end
