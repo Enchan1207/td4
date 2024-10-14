@@ -1,14 +1,14 @@
 module Register #(
-    parameter bitWidth=4
+    parameter N=4
 ) (
     input CLK,
     input CLR,
     input CS,
-    input [bitWidth-1:0] D,
-    output [bitWidth-1:0] Q
+    input [N-1:0] D,
+    output [N-1:0] Q
 );
 
-reg [bitWidth-1:0] memory = 0;
+reg [N-1:0] memory = 0;
 
 assign Q = memory;
 

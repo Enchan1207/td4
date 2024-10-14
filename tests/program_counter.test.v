@@ -12,7 +12,7 @@ module program_counter_test ();
     reg [bitWidth-1:0] D = 0;
     wire [bitWidth-1:0] Q;
     
-    ProgramCounter #(.bitWidth(bitWidth)) progcnt (.CLK(CLK), .CLR(CLR), .CS(CS), .D(D), .Q(Q));
+    ProgramCounter #(.N(bitWidth)) progcnt (.CLK(CLK), .CLR(CLR), .CS(CS), .D(D), .Q(Q));
 
     initial begin
         $dumpfile("program_counter_test.vcd");

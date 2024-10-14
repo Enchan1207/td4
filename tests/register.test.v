@@ -12,7 +12,7 @@ module register_test ();
     reg [bitWidth-1:0] D = 0;
     wire [bitWidth-1:0] Q;
     
-    Register #(.bitWidth(bitWidth)) register (.CLK(CLK), .CLR(CLR), .CS(CS), .D(D), .Q(Q));
+    Register #(.N(bitWidth)) register (.CLK(CLK), .CLR(CLR), .CS(CS), .D(D), .Q(Q));
 
     initial begin
         $dumpfile("register_test.vcd");

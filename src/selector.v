@@ -1,16 +1,16 @@
 module DataSelector #(
-    parameter bitWidth = 4
+    parameter N = 4
 ) (
-    input [bitWidth-1:0] A,
-    input [bitWidth-1:0] B,
-    input [bitWidth-1:0] C,
-    input [bitWidth-1:0] D,
+    input [N-1:0] A,
+    input [N-1:0] B,
+    input [N-1:0] C,
+    input [N-1:0] D,
     input [1:0] OE,
-    output [bitWidth-1:0] Y
+    output [N-1:0] Y
 );
 
-    function [bitWidth-1:0] sel;
-        input [bitWidth-1:0] A, B, C, D;
+    function [N-1:0] sel;
+        input [N-1:0] A, B, C, D;
         input [1:0] n;
         case (n)
             2'd0: sel = A;

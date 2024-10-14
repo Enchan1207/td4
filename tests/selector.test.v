@@ -11,7 +11,7 @@ module selector_test ();
     reg [1:0] OE = 0;
     wire [bitWidth-1:0] Y;
 
-    DataSelector #(.bitWidth(bitWidth)) selector (.A(A), .B(B), .C(C), .D(D), .OE(OE), .Y(Y));
+    DataSelector #(.N(bitWidth)) selector (.A(A), .B(B), .C(C), .D(D), .OE(OE), .Y(Y));
 
     initial begin
         $dumpfile("selector_test.vcd");

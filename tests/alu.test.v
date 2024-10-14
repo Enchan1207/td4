@@ -9,7 +9,7 @@ module alu_test ();
     wire [bitWidth-1:0] Y;
     wire C;
     
-    ALU #(.bitWidth(bitWidth)) alu (.A(A), .B(B), .Y(Y), .C(C));
+    ALU #(.N(bitWidth)) alu (.A(A), .B(B), .Y(Y), .C(C));
 
     initial begin
         $dumpfile("alu_test.vcd");
