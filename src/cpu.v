@@ -14,7 +14,8 @@ module TD4 (
     output [3:0] OUT
 );
 
-    localparam N = 4;
+    // 内部データバスのビット長
+    localparam N = 8;
 
     // レジスタファイル (接続 0:レジスタA 1:レジスタB 2:入力ポート 3:プログラムカウンタ)
     wire [3:0] registerFileCS;
@@ -30,7 +31,7 @@ module TD4 (
         .A(registerFileInternalOutput[0]),
         .B(registerFileInternalOutput[1]),
         .C(IN),
-        .D(4'b0),
+        .D({N{1'b0}}),
         .OE(registerFileOE),
         .Y(registerFileOutput)
     );
@@ -38,10 +39,11 @@ module TD4 (
     // ALU (接続 A:レジスタファイル出力 B:命令コード下位4ビット)
     reg aluCarryState = 0;
     wire aluCarrySignal;
+    wire [N-1:0] aluInput;
     wire [N-1:0] aluOutput;
     ALU #(.N(N)) alu(
         .A(registerFileOutput),
-        .B(D[N-1:0]),
+        .B(aluInput),
         .Y(aluOutput),
         .C(aluCarrySignal)
     );
@@ -57,6 +59,7 @@ module TD4 (
     // モジュール間の接続
     assign A = registerFileInternalOutput[2]; // 外部アドレスバスとPCの出力とを接続
     assign registerFileInput = aluOutput;
+    assign aluInput = D[N-1:0]; // 外部データバスとALUの入力とを接続
 
     always @(posedge CLK) begin
         aluCarryState <= aluCarrySignal;
