@@ -20,8 +20,9 @@ module cpu_test ();
         $dumpfile("cpu_test.vcd");
         $dumpvars(0, cpu_test);
 
+        cpuInput <= 4'hD;
         #3;
-        if(cpuOutput != 5) begin
+        if(cpuOutput != 4'hD) begin
             $fatal(1, "Invalid output");
         end
 
